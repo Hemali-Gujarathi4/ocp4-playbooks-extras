@@ -1,4 +1,0 @@
-- name: Validate image registry and run e2e
-  hosts: bastion
-  roles:
-  - ocp-image-registry-e2e
