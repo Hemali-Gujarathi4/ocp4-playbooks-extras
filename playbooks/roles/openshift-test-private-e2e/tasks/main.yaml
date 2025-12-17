@@ -20,6 +20,11 @@
         msg: "Please set the environment variables GITHUB_USERNAME and GITHUB_ACCESS_TOKEN"
       when: github_username == "" and github_personal_access_token == ""
 
+    - name: Install dependencies for running e2e tests
+      dnf:
+        name: make
+        state: present
+
     - name: Include role for installation of Go lang
       include_role:
         name: golang-installation
@@ -31,7 +36,7 @@
       file:
         path: "{{ openshift_test_private_directory }}"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Clone openshift-test-private repo
       git:
@@ -54,7 +59,7 @@
       failed_when: bin_output.stdout|int != 1
 
     - name: Run the e2e test command for all
-      shell: ./bin/extended-platform-tests run all --dry-run | 
+      shell: ./bin/extended-platform-tests run all --dry-run |
         ./bin/extended-platform-tests run -f - -o ../all-tests-logs.txt
       when: not testcase_filters
       args:
@@ -62,7 +67,8 @@
       environment: "{{ openshift_test_private_env }}"
 
     - name: Run the e2e test command for multiple filters
-      shell: ./bin/extended-platform-tests run all --dry-run | grep "{{ testcase_filters }}" | 
+      shell:
+        ./bin/extended-platform-tests run all --dry-run | grep "{{ testcase_filters }}" |
         ./bin/extended-platform-tests run -f - -o ../multi-filter-tests-logs.txt
       when: testcase_filters
       args:

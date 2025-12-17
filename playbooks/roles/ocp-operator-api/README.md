@@ -22,7 +22,9 @@ Role Variables
 | operator_sdk_version                    | no       | "1.38.0"                                                                               | Version of operator-sdk to be installed.                                                                                                       |
 | op_api_dir                      | no       | "/tmp/operator-api"                                                                    | Directory where the operator workspace are intialized.                                                                                                         |
 | quay_username                    | yes       |                                                                                | quay account username where the operator images will be pushed                                                                                                       |
-| quay_token                    | yes       |                                                                                | quay account token to push the operator images                                                                                                        |
+| quay_token                    | yes       |                                                                                | quay account token to push the operator images 
+| docker_username                    | yes       |                                                                                | docker account username for docker.io                                                                                                      |
+| docker_passwd                    | yes       |                                                                                | docker account password for docker.io                                                                                                          |
 
 
 
